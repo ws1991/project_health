@@ -1,0 +1,12 @@
+config/
+# 其他常见的需要忽略的文件（建议也加上）
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.env
+.DS_Store
+.ipynb_checkpoints

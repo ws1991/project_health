@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "运行当前Python文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",  // ← 关键！运行当前打开的文件
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "健康数据分析",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/health_analysis.py",
+            "cwd": "${workspaceFolder}", // 工作目录设为项目根目录
+            "console": "integratedTerminal",
+            "env": {
+                "DATA_PATH": "${workspaceFolder}/data/health.csv",
+                "OUTPUT_PATH": "${workspaceFolder}/output"
+            },
+            "justMyCode": true,
+            // 在调试前自动执行的任务（可选）
+            "preLaunchTask": "setup-project"
+        }
+    ]
+}

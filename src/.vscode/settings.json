@@ -1,0 +1,100 @@
+// .vscode/settings.json
+{
+    // ========== Python 配置 ==========
+    "python.defaultInterpreterPath": "python",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length", "88"],
+    
+    // ========== 编辑器外观 ==========
+    "editor.fontSize": 15,
+    "editor.fontFamily": "'Cascadia Code', 'Microsoft YaHei UI', Consolas, monospace",
+    "editor.lineHeight": 1.8,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.cursorSmoothCaretAnimation": "on",
+    
+    // ========== 代码编辑 ==========
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.suggestSelection": "first",
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    
+    // ========== 文件管理 ==========
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    
+    // 排除不必要的文件
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/*.pyc": true,
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/thumbs.db": true,
+        "**/desktop.ini": true
+    },
+    
+    // ========== 工作区/终端 ==========
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "material-icon-theme",
+    
+    // ========== 不同语言的特定设置 ==========
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    
+    "[json]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": true
+    },
+    
+    // ========== 健康项目特定 ==========
+    // 为数据文件添加语法高亮
+    "files.associations": {
+        "*.csv": "csv",
+        "*.json": "json",
+        "health_*.py": "python"
+    },
+    
+    // 调试相关
+    "debug.console.fontSize": 14,
+    "debug.console.wordWrap": true,
+    "debug.internalConsoleOptions": "neverOpen",
+    
+    // 扩展特定设置
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "code-runner.runInTerminal": true,
+    
+    // 外观主题（可选）
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.productIconTheme": "fluent-icons"
+}
