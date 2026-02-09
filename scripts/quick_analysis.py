@@ -118,44 +118,22 @@ def create_visualizations(df):
     
     import matplotlib.pyplot as plt
     import matplotlib
-    
-    # ============ 关键诊断 ============
-    print("🔍 关键诊断信息:")
-    print(f"1. 当前字体设置: {matplotlib.rcParams['font.sans-serif'][:3]}")
-    print(f"2. 后端: {matplotlib.get_backend()}")
-    print(f"3. 数据形状: {df.shape if hasattr(df, 'shape') else '无数据'}")
-    
-    # 立即测试中文显示
-    try:
-        fig_test, ax_test = plt.subplots(figsize=(6, 4))
-        test_texts = [
-            "Microsoft YaHei测试",
-            "癫痫发作分析",
-            "日期: 2024年",
-            "程度: 中度"
-        ]
-        
-        for i, text in enumerate(test_texts):
-            ax_test.text(0.5, 0.7 - i*0.15, text, 
-                        fontsize=12, ha='center', va='center',
-                        bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue"))
-        
-        ax_test.set_xlim(0, 1)
-        ax_test.set_ylim(0, 1)
-        ax_test.axis('off')
-        
-        plt.tight_layout()
-        test_file = "output/immediate_font_test.png"
-        plt.savefig(test_file, dpi=150, bbox_inches='tight')
-        plt.close(fig_test)
-        
-        print(f"✅ 即时字体测试图已保存: {test_file}")
-        print("   请立即打开查看中文是否显示")
-        
-    except Exception as e:
-        print(f"❌ 字体测试失败: {e}")
+    import numpy as np
         
     # 使用matplotlib默认样式，但自定义一些参数
+    plt.rcParams.update({
+        'axes.grid': True,
+        'grid.alpha': 0.3,
+        'axes.titlesize': 14,
+        'axes.labelsize': 12,
+        'xtick.labelsize': 10,
+        'ytick.labelsize': 10,
+        'legend.fontsize': 10,
+    })
+    
+    # 确保中文字体
+    matplotlib.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'KaiTi']
+    matplotlib.rcParams['axes.unicode_minus'] = False
 
 
     # =================================
@@ -436,8 +414,6 @@ def main():
     print(f"✅ 使用字体: {font_list[0]}")
     print("="*60)
     # ===================================================
-    test_font_application()
-    # ====================================================
     
     # 忽略警告
     import warnings
@@ -471,48 +447,6 @@ def main():
         print("📄 查看数据: output/processed_health_data.csv")
 # 在生成第一个图表前，添加这个测试
 
-def test_font_application():
-    """测试字体是否真的应用到图表"""
-    import matplotlib.pyplot as plt
-    
-    print("🔍 测试字体应用...")
-    
-    # 创建最简单的测试图
-    fig, ax = plt.subplots(figsize=(6, 4))
-    
-    # 使用多种中文文本
-    test_texts = [
-        "Microsoft YaHei测试",
-        "发作程度分析",
-        "睡眠时长记录",
-        "日期范围统计"
-    ]
-    
-    for i, text in enumerate(test_texts):
-        ax.text(0.5, 0.8 - i*0.2, text, 
-                fontsize=12, 
-                ha='center',
-                transform=ax.transAxes)
-    
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.axis('off')
-    
-    # 保存并立即显示信息
-    test_file = "font_application_test.png"
-    plt.savefig(test_file, dpi=150, bbox_inches='tight')
-    plt.close()
-    
-    print(f"✅ 字体应用测试图已保存: {test_file}")
-    
-    # 验证文件是否存在
-    import os
-    if os.path.exists(test_file):
-        print(f"   文件大小: {os.path.getsize(test_file)} 字节")
-        return True
-    else:
-        print("❌ 测试图未生成")
-        return False
 
 if __name__ == "__main__":
     main()

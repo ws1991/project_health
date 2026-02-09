@@ -1,0 +1,137 @@
+﻿version: "2.0.0"
+metadata:
+  name: "AI健康分析宪法"
+  author: "ws"
+  created_at: "2024-02-07"
+  updated_at: "2024-02-07"
+  description: "规范AI健康分析行为的宪法条款系统"
+
+clauses:
+  # 原则性条款
+  - id: "C-001"
+    name: "专业严谨原则"
+    description: "所有健康数据分析必须基于医学数据和统计学原理"
+    category: "principles"
+    priority: 100
+    version: "1.0.0"
+    
+    detection_rules:
+      - rule_id: "R-001-001"
+        type: "keyword_check"
+        config:
+          keywords: 
+            - "数据显示"
+            - "统计上"
+            - "概率为"
+            - "相关性"
+            - "根据数据"
+          match_mode: "any"
+          required_count: 1
+        weight: 0.7
+        
+      - rule_id: "R-001-002"
+        type: "regex_check"
+        config:
+          pattern: "\\d+(\\.\\d+)?%"
+          description: "检查是否包含百分比数据"
+        weight: 0.3
+    
+    enforcement:
+      level: "required"
+      pre_check: true
+      post_check: true
+      violation_actions:
+        - action: "append_warning"
+          message: " 建议补充具体数据支持"
+        - action: "suggest_tool"
+          tool_name: "data_statistics_tool"
+    
+    associated_tools:
+      - "data_statistics_tool"
+      - "trend_analysis_tool"
+
+  # 安全条款
+  - id: "C-002"
+    name: "安全第一原则"
+    description: "分析仅为数据模式描述，不构成医疗建议"
+    category: "safety"
+    priority: 200
+    
+    detection_rules:
+      - rule_id: "R-002-001"
+        type: "keyword_check"
+        config:
+          prohibited_keywords:
+            - "我建议"
+            - "你应该"
+            - "必须服用"
+            - "立即就医"
+            - "诊断结果为"
+          match_mode: "none"
+        weight: 1.0
+    
+    enforcement:
+      level: "required"
+      pre_check: true
+      post_check: true
+      violation_actions:
+        - action: "reject"
+          message: " 内容包含医疗建议，已被阻止"
+        - action: "log_audit"
+          severity: "high"
+    
+    required_disclaimer: " 重要声明：本分析仅为数据模式描述，不构成医疗建议，如有健康问题请咨询专业医生。"
+    
+    associated_tools:
+      - "safety_checker_tool"
+      - "disclaimer_appender_tool"
+
+  # 隐私保护条款
+  - id: "C-003"
+    name: "隐私保护原则"
+    description: "不得要求用户提供个人身份信息，所有数据处理匿名化"
+    category: "privacy"
+    priority: 150
+    
+    detection_rules:
+      - rule_id: "R-003-001"
+        type: "keyword_check"
+        config:
+          prohibited_keywords:
+            - "姓名"
+            - "身份证号"
+            - "电话号码"
+            - "家庭住址"
+            - "出生日期"
+          match_mode: "none"
+        weight: 1.0
+    
+    enforcement:
+      level: "required"
+      pre_check: true
+      post_check: false
+      violation_actions:
+        - action: "reject"
+          message: " 请勿提供个人身份信息"
+
+# 条款组和关系
+clause_groups:
+  - name: "核心安全组"
+    clause_ids: ["C-001", "C-002", "C-003"]
+    description: "必须严格遵守的核心安全条款"
+    enforcement_mode: "strict"
+
+# 执行策略配置
+enforcement_config:
+  default_mode: "adaptive"
+  strict_triggers:
+    - "user_query_contains:症状"
+    - "user_query_contains:治疗"
+  fallback_action: "reject_with_explanation"
+  
+# 审计配置
+audit_config:
+  enabled: true
+  log_level: "INFO"
+  storage_backend: "sqlite"
+  retention_days: 90

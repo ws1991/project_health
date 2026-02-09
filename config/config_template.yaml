@@ -1,0 +1,30 @@
+# 配置文件模板
+# 复制此文件为 secrets.yaml 并填写您的实际配置
+
+deepseek:
+  api_key: "your-deepseek-api-key-here"
+  base_url: "https://api.deepseek.com/v1"
+  model: "deepseek-chat"
+  temperature: 0.1
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/agent.log"
+
+agent:
+  max_iterations: 10
+  verbose: true
+
+paths:
+  data_dir: "data/"
+  output_dir: "output/"
+  constitution: "健康数据分析智能体宪法V1.0.txt"
+
+# 健康数据配置（可根据需要添加）
+health_data:
+  default_columns:
+    - "date"
+    - "sleep_hours"
+    - "steps"
+    - "heart_rate"
+  date_format: "%Y-%m-%d"

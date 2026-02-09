@@ -1,8 +1,9 @@
-﻿# ============================================
+# ============================================
 # 健康数据分析AI Agent项目 - .gitignore
 # ============================================
 
 # ========== 1. 核心机密文件 ==========
+# 配置文件（包含API密钥等敏感信息）
 config/secrets.yaml
 config/*.yaml
 config/*.yml
@@ -12,6 +13,9 @@ config/*.json
 
 # ========== 2. 数据文件 ==========
 # 忽略所有数据文件，只保留 .gitkeep
+data/*
+!data/.gitkeep          # 保留这个空文件
+!data/README.md         # 可以保留一个说明文档
 data/*
 !data/.gitkeep
 !data/raw/.gitkeep
@@ -25,6 +29,11 @@ output/*
 !output/reports/.gitkeep
 !output/logs/.gitkeep
 !output/tables/.gitkeep
+output/**/*.png
+output/**/*.jpg
+output/**/*.pdf
+output/**/*.html
+output/**/*.txt
 
 # ========== 4. Python缓存 ==========
 __pycache__/
@@ -60,46 +69,19 @@ var/
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# ========== 7. IDE和编辑器 ==========
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-.idea/
-*.iml
-*.iws
-*.ipr
+# PyInstaller
+*.manifest
+*.spec
 
-# ========== 8. Jupyter ==========
-.ipynb_checkpoints/
-*.ipynb
-
-# ========== 9. 操作系统文件 ==========
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
-
-# ========== 10. 日志和数据库 ==========
-*.log
-logs/
-*.sqlite3
-*.db
-*.sqlite
-
-# ========== 11. 测试和覆盖率 ==========
-.mypy_cache/
-.dmypy.json
-dmypy.json
-.pytest_cache/
-.pyre/
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
 .coverage
 .coverage.*
 .cache
@@ -108,12 +90,86 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-htmlcov/
-.tox/
-.nox/
+.pytest_cache/
 
-# ========== 12. 项目特定文件 ==========
-# 临时测试文件（请根据需要调整）
-chinese_font_test_real.png
-chinese_test_final.png
-font_application_test.png
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ========== 5. 编辑器/IDE文件 ==========
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Jupyter
+*.ipynb
+
+# ========== 6. 操作系统文件 ==========
+# Mac
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+desktop.ini
+Thumbs.db
+*.lnk
+
+# ========== 7. 日志文件 ==========
+*.log
+logs/
+agent_runs/
+debug/
+
+# ========== 8. 大型模型文件 ==========
+# 如果将来需要本地模型
+models/*.bin
+models/*.pt
+models/*.pth
+models/*.gguf
+
+# ========== 9. 临时文件 ==========
+temp/
+tmp/
+*.tmp
+*.temp
+~*
+*~
+
+# ========== 10. 测试数据 ==========
+# 测试时生成的临时数据
+test_data/
+sample_*.csv

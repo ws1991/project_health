@@ -1,14 +1,41 @@
 // .vscode/settings.json
 {
     // ========== Python 配置 ==========
-    "python.defaultInterpreterPath": "python",
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.typeCheckingMode": "basic",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["--line-length", "88"],
+
     
+    // Python相关设置
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    
+    // 编辑器设置
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    
+    // 文件自动保存
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    
+    // Git设置
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    
+    // 终端设置
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced"
+    },
     // ========== 编辑器外观 ==========
     "editor.fontSize": 15,
     "editor.fontFamily": "'Cascadia Code', 'Microsoft YaHei UI', Consolas, monospace",
@@ -19,7 +46,6 @@
     "editor.cursorSmoothCaretAnimation": "on",
     
     // ========== 代码编辑 ==========
-    "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,
     "editor.suggestSelection": "first",
@@ -30,28 +56,28 @@
     },
     
     // ========== 文件管理 ==========
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000,
     "files.eol": "\n",
     "files.encoding": "utf8",
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     
-    // 排除不必要的文件
+    // 隐藏不必要的文件和文件夹
     "files.exclude": {
         "**/__pycache__": true,
         "**/.pytest_cache": true,
-        "**/*.pyc": true,
+        "**/.mypy_cache": true,
+        "**/.coverage": true,
         "**/.git": true,
+        "**/.vscode": false,  // 设置为false以显示.vscode文件夹本身
+        "**/venv": true,      // 隐藏虚拟环境
+        "**/.env": true,      // 隐藏环境变量文件
+        "**/*.pyc": true,      // 隐藏Python编译文件
         "**/.DS_Store": true,
         "**/thumbs.db": true,
-        "**/desktop.ini": true
-    },
-    
+        "**/desktop.ini": true   },
     // ========== 工作区/终端 ==========
     "terminal.integrated.cwd": "${workspaceFolder}",
     "terminal.integrated.fontSize": 14,
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "workbench.startupEditor": "none",
     "workbench.iconTheme": "material-icon-theme",
     
@@ -79,6 +105,9 @@
     // ========== 健康项目特定 ==========
     // 为数据文件添加语法高亮
     "files.associations": {
+                "*.yaml": "yaml",
+        "*.yml": "yaml",
+        "*.json": "jsonc",     // JSON with comments
         "*.csv": "csv",
         "*.json": "json",
         "health_*.py": "python"
@@ -96,5 +125,9 @@
     
     // 外观主题（可选）
     "workbench.colorTheme": "Default Dark Modern",
-    "workbench.productIconTheme": "fluent-icons"
+    //    "workbench.productIconTheme": "fluent-icons"
+    "terminal.integrated.env.windows": {
+        "VIRTUAL_ENV": "${workspaceFolder}/venv",
+        "PATH": "${workspaceFolder}/venv/Scripts;${env:PATH}"
+    }
 }
